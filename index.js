@@ -2,6 +2,9 @@ const express = require('express')   // express 모듈을 가져옴
 const app = express()        // 함수를 이용해서 새로운 express app을 만듬
 const port = 3000
 const bodyParser = require("body-parser")
+
+const config = require('./config/key')
+
 const { User } = require("./models/User")
 
 // application/x-www-form-urlencoded 타입을 분석해서 데이터를 가져올 수 있음.
@@ -11,7 +14,7 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://ysy:ysy@boilerplate.odpmo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+mongoose.connect(config.mongoURI,{
     useNewUrlParser : true,
     useUnifiedTopology : true,
     // useCreateIndex : true,
@@ -40,4 +43,5 @@ app.listen(port, () => {
 
 // mongodb+srv://ysy:<password>@boilerplate.odpmo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 // mongodb+srv://ysy:<password>@boilerplate.odpmo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+// 'mongodb+srv://ysy:ysy@boilerplate.odpmo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 // test
